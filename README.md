@@ -46,3 +46,16 @@ cargo watch -- cargo test
         - start a framework to invoke us
         - start a web container
         - create massive amounts of test data
+
+# Approach in Rust
+
+Testing can be defined in the same file of the source.
+Define a conttract by using trait objects to [implement an object-oriented design pattern](https://doc.rust-lang.org/book/ch17-03-oo-design-patterns.html).
+It's the conventional, non-magical approach: depedency injection of underlying systems, wiring objects at the top-level, and mock testing through stubbed objects.
+In methods setting the first argument as `&mut self` shifts the control to the encapsulated object to determine its statefulness.
+
+Remember to restrict the trait as object-safe:
+* Don't return `Self`
+* Don't use generics in the trait
+
+
